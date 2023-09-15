@@ -1,45 +1,35 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++.h>     
 using namespace std;
-#define int long long
-long long t, a[100005];
-
-void solve()
-{
-    int n, sum = 0;
-    cin >> n;
-    int a[n];
-    for (int i = 0; i < n; i++)
-    {
-        cin >> a[i];
-        sum += a[i];
+#define ll long long
+void solve(){
+    ll n; cin>>n;
+    ll sum=0,ans=21;
+    vector<ll> a(n);
+    for(auto &it:a){
+        cin>>it;
+        sum+=it;
     }
-    if (sum % 2 == 0)
-    {
-        cout << 0;
-        return;
-    }
-    sort(a, a + n);
-    int i = 0;
-    while (i < n)
-    {
-        if (a[i] % 2 == 1)
-        {
-            cout << floor(log2(a[i]));
-            return;
+    if(sum&1){
+        for(auto &it:a){
+            ll cur=it,now=0;
+            while(!((cur+it)&1)){
+                now++;
+                cur/=2;
+            }
+            ans=min(ans,now);
         }
-        i++;
     }
+    else{
+        ans=0;
+    }
+    cout<<ans<<"\n";
 }
-
-int32_t main()
-{
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    int t;
-    cin >> t;
-    while (t--)
-    {
+int main()                                                                                
+{  
+    ios_base::sync_with_stdio(false);                         
+    cin.tie(NULL);  
+    ll t; cin>>t;
+    while(t--){
         solve();
-        cout << endl;
     }
-}
+} 
